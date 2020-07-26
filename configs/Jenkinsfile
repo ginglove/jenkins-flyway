@@ -1,4 +1,5 @@
 def config
+def DB_CRED,DB_REMOTE_CONFIG
 
 pipeline {
    agent any
@@ -31,8 +32,10 @@ pipeline {
         stage('FLYWAY MIGRATE PROCESS') {
              steps {
                 echo "======> Start Flyway Migration Process <======";
-                DB_CRED=config.db_remote_db_cred.toString()
-                DB_REMOTE_CONFIG=config.db_remote_config.toString()
+                script{
+                    DB_CRED=config.db_remote_db_cred.toString()
+                    DB_REMOTE_CONFIG=config.db_remote_config.toString()
+                }
                 echo '${DB_CRED}'
                 echo '${DB_REMOTE_CONFIG}'
                 // script{
