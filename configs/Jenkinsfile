@@ -18,7 +18,7 @@ pipeline {
         stage('PULL RESOURCE FROM BITBUCKET') {
             steps {
                 script{
-                    config = readYaml file: 'configs/config.yaml'         
+                    config = readYaml file: 'configs/config.yml'         
                     sh (script: '''
                     rm -rf /Users/admin/.jenkins/workspace/flyway-pipelines;
                     mkdir  /Users/admin/.jenkins/workspace/flyway-pipelines;
