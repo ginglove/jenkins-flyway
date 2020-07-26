@@ -1,6 +1,6 @@
 git_remote_config: "ssh://git@bitbucket.digital.vn:7999/dops/jenkins-db-jobs.git"
 git_remote_config_cred: web_bitbucket
-db_remote_config: jdbc:mariadb://10.255.133.85:3306
-db_remote_config_host: 10.255.133.85
+db_remote_config: mysql://localhost:3306
+db_remote_config_host: localhost
 db_remote_config_port: 3306
-db_remote_db_cred: db-migration-alpha-devops
+db_remote_db_cred: test
