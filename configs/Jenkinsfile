@@ -20,10 +20,10 @@ pipeline {
                 script{
                     config = readYaml file: 'configs/config.yml'         
                     sh (script: '''
-                    rm -rf /Users/admin/Downloads/flyway-6.5.1/sql;
-                    mkdir  /Users/admin/Downloads/flyway-6.5.1/sql;
-                    cp -r /Users/admin/.jenkins/workspace/flyway-pipelines@script/sql/Normal/* /Users/admin/Downloads/flyway-6.5.1/sql/;
-                    ls -al /Users/admin/Downloads/flyway-6.5.1/sql ;
+                    rm -rf /Users/admin/.jenkins/workspace/flyway-6.5.1/sql;
+                    mkdir  /Users/admin/.jenkins/workspace/flyway-6.5.1/sql;
+                    cp -r /Users/admin/.jenkins/workspace/flyway-pipelines@script/sql/Normal/* /Users/admin/.jenkins/workspace/flyway-6.5.1/sql;
+                    ls -al /Users/admin/.jenkins/workspace/flyway-6.5.1/sql ;
                     ''');
                 }
             }
@@ -32,9 +32,7 @@ pipeline {
              steps {
                 echo "======> Start Flyway Migration Process <======";
                 echo config.db_remote_db_cred.toString()
-                echo "${env.JOB_NAME}";
-                echo "${MIGRATE_VAR}";
-                echo "${DATABASE_VAR}";
+                echo config.db_remote_config/${DATABASE_VAR}
                 // script{
                 //     sh (script: '''
                 //     rm -rf /u01/data/jenkins/tools/flyway/sql;
@@ -61,9 +59,9 @@ pipeline {
                        echo "======> Start Copy ROLLBACK Folder PROGRESS <======";
                        script{
                         sh (script: '''
-                        rm -rf /u01/data/jenkins/tools/flyway/sql;
-                        mkdir  /u01/data/jenkins/tools/flyway/sql;
-                        cp -r /Users/admin/.jenkins/workspace/flyway-pipelines@script/sql/Rollback/* /u01/data/jenkins/tools/flyway/sql/;
+                        rm -rf /Users/admin/.jenkins/workspace/flyway-6.5.1/sql;
+                        mkdir  /Users/admin/.jenkins/workspace/flyway-6.5.1/sql;
+                        cp -r /Users/admin/.jenkins/workspace/flyway-pipelines@script/sql/Rollback/* /Users/admin/.jenkins/workspace/flyway-6.5.1/sql/;
                         ''');
                         }
                         echo "======> Start FLYWAY ROLLBACK <======"
