@@ -10,7 +10,7 @@ pipeline {
         )
         choice(
           name: 'DATABASE_VAR',
-          choices: ['test_migrate_flyway','cdcn_customer_service_v2','test'],
+          choices: ['flyway_migrate','cdcn_customer_service_v2','test'],
           description: 'Chon Database variable'
         )
    }
