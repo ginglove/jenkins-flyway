@@ -20,10 +20,10 @@ pipeline {
                 script{
                     config = readYaml file: 'configs/config.yaml'         
                     sh (script: '''
-                    rm -rf /u01/data/jenkins/tools/flyway/sql;
-                    mkdir  /u01/data/jenkins/tools/flyway/sql;
-                    cp -r /u01/data/jenkins/workspace/${env.JOB_NAME}/sql/Normal/* /u01/data/jenkins/tools/flyway/sql/;
-                    ls -al /u01/data/jenkins/tools/flyway/sql ;
+                    rm -rf /Users/admin/.jenkins/workspace/flyway-pipelines;
+                    mkdir  /Users/admin/.jenkins/workspace/flyway-pipelines;
+                    cp -r /Users/admin/.jenkins/workspace/flyway-pipelines/Normal/* /Users/admin/Downloads/flyway-6.5.1/sql/;
+                    ls -al /Users/admin/Downloads/flyway-6.5.1/sql ;
                     ''');
                 }
             }
@@ -42,7 +42,7 @@ pipeline {
                 //     cp -r ${env.WORKSPACE}/sql/Success/* /u01/data/jenkins/tools/flyway/sql/;
                 //     ''');
                 // }
-                flywayrunner commandLineArgs: '', credentialsId: 'config.db_remote_db_cred' , flywayCommand: '${MIGRATE_VAR}', installationName: 'flyway-test', locations: '', url: 'config.db_remote_config/${DATABASE_VAR}'
+                flywayrunner commandLineArgs: '', credentialsId: 'config.db_remote_db_cred' , flywayCommand: '${MIGRATE_VAR}', installationName: 'flyway', locations: '', url: 'config.db_remote_config/${DATABASE_VAR}'
             }
         }
     }
@@ -51,8 +51,9 @@ pipeline {
             script{
                 stage('ROLLBACK PROCESS'){
                         echo "======> Start DELETE Version for ROLLBACK  <======";
-                        docker.withRegistry("http://nexus.digital.vn", 'nexus_docker') {
-                            sh "docker pull mysql"
+                        // This step should not normally be used in your script. Consult the inline help for details.
+                        withDockerRegistry(credentialsId: 'docker-hub', url: 'https://hub.docker.com') {
+                                sh label: '',script: 'docker pull mysql';
                         }
                         withCredentials([usernamePassword(credentialsId: 'config.db_remote_db_cred', passwordVariable: 'DB_PASSWORD', usernameVariable: 'DB_USERNAME')]) {
                                 sh label: '', script: 'docker run mysql bash -c "mysql -h db_remote_config_host -P db_remote_config_port --protocol=tcp -u$DB_USERNAME -p$DB_PASSWORD -e \\\" DELETE from $DATABASE_VAR.flyway_schema_history where script in (select * from ( select script from $DATABASE_VAR.flyway_schema_history order by installed_rank desc limit 1) as tmp);\\\""'
