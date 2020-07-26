@@ -22,7 +22,7 @@ pipeline {
                     sh (script: '''
                     rm -rf /Users/admin/Downloads/flyway-6.5.1/sql;
                     mkdir  /Users/admin/Downloads/flyway-6.5.1/sql;
-                    cp -r /Users/admin/.jenkins/workspace/flyway-pipelines/sql/Normal/* /Users/admin/Downloads/flyway-6.5.1/sql/;
+                    cp -r /Users/admin/.jenkins/workspace/flyway-pipelines@script/Normal/* /Users/admin/Downloads/flyway-6.5.1/sql/;
                     ls -al /Users/admin/Downloads/flyway-6.5.1/sql ;
                     ''');
                 }
@@ -63,7 +63,7 @@ pipeline {
                         sh (script: '''
                         rm -rf /u01/data/jenkins/tools/flyway/sql;
                         mkdir  /u01/data/jenkins/tools/flyway/sql;
-                        cp -r /u01/data/jenkins/workspace/${env.JOB_NAME}/sql/Rollback/* /u01/data/jenkins/tools/flyway/sql/;
+                        cp -r /Users/admin/.jenkins/workspace/flyway-pipelines@script/sql/Rollback/* /u01/data/jenkins/tools/flyway/sql/;
                         ''');
                         }
                         echo "======> Start FLYWAY ROLLBACK <======"
