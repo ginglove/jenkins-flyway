@@ -31,8 +31,10 @@ pipeline {
         stage('FLYWAY MIGRATE PROCESS') {
              steps {
                 echo "======> Start Flyway Migration Process <======";
-                echo config.db_remote_db_cred.toString()
-                echo config.db_remote_config/${DATABASE_VAR}
+                DB_CRED=config.db_remote_db_cred.toString()
+                DB_REMOTE_CONFIG=config.db_remote_config.toString()
+                echo '${DB_CRED}'
+                echo '${DB_REMOTE_CONFIG}'
                 // script{
                 //     sh (script: '''
                 //     rm -rf /u01/data/jenkins/tools/flyway/sql;
