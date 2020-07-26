@@ -22,7 +22,7 @@ pipeline {
                     sh (script: '''
                     rm -rf /Users/admin/.jenkins/workspace/flyway-pipelines;
                     mkdir  /Users/admin/.jenkins/workspace/flyway-pipelines;
-                    cp -r /Users/admin/.jenkins/workspace/flyway-pipelines/Normal/* /Users/admin/Downloads/flyway-6.5.1/sql/;
+                    cp -r /Users/admin/.jenkins/workspace/flyway-pipelines/sql/Normal/* /Users/admin/Downloads/flyway-6.5.1/sql/;
                     ls -al /Users/admin/Downloads/flyway-6.5.1/sql ;
                     ''');
                 }
