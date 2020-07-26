@@ -20,8 +20,8 @@ pipeline {
                 script{
                     config = readYaml file: 'configs/config.yml'         
                     sh (script: '''
-                    rm -rf /Users/admin/.jenkins/workspace/flyway-pipelines;
-                    mkdir  /Users/admin/.jenkins/workspace/flyway-pipelines;
+                    rm -rf /Users/admin/.jenkins/workspace/flyway-pipelines/sql;
+                    mkdir  /Users/admin/.jenkins/workspace/flyway-pipelines/sql;
                     cp -r /Users/admin/.jenkins/workspace/flyway-pipelines/sql/Normal/* /Users/admin/Downloads/flyway-6.5.1/sql/;
                     ls -al /Users/admin/Downloads/flyway-6.5.1/sql ;
                     ''');
