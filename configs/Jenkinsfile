@@ -36,8 +36,8 @@ pipeline {
                     DB_CRED=config.db_remote_db_cred.toString()
                     DB_REMOTE_CONFIG=config.db_remote_config.toString()
                 }
-                echo '${DB_CRED}'
-                echo '${DB_REMOTE_CONFIG}'
+                echo ${DB_CRED}
+                echo ${DB_REMOTE_CONFIG}
                 // script{
                 //     sh (script: '''
                 //     rm -rf /u01/data/jenkins/tools/flyway/sql;
